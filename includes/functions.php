@@ -120,6 +120,23 @@ function render_header($action) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($page_title); ?></title>
+    
+    <!-- 主題預載入腳本 - 防止 Dark Mode 閃爍 -->
+    <script>
+        (function() {
+            // 在頁面渲染前立即設定主題，避免白色閃爍
+            try {
+                const savedTheme = localStorage.getItem('bs-theme');
+                const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-bs-theme', theme);
+            } catch (e) {
+                // 如果發生錯誤，使用預設亮色主題
+                document.documentElement.setAttribute('data-bs-theme', 'light');
+            }
+        })();
+    </script>
+    
     <!-- 引入 Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 引入 Bootstrap Icons -->
@@ -179,19 +196,25 @@ function render_footer() {
     <script>
         // Bootstrap 5 Dark Mode Toggle - 內嵌版本
         document.addEventListener('DOMContentLoaded', function() {
-            // 初始化主題
+            // 初始化主題（主題已在 head 中預載入，這裡只更新按鈕）
             function loadTheme() {
-                const savedTheme = localStorage.getItem('bs-theme');
-                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                let theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-                setTheme(theme);
+                const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+                updateToggleButton(currentTheme);
             }
             
             // 設定主題
             function setTheme(theme) {
+                // 添加過渡動畫類別
+                document.documentElement.classList.add('theme-transitioning');
+                
                 document.documentElement.setAttribute('data-bs-theme', theme);
                 localStorage.setItem('bs-theme', theme);
                 updateToggleButton(theme);
+                
+                // 移除過渡動畫類別
+                setTimeout(() => {
+                    document.documentElement.classList.remove('theme-transitioning');
+                }, 200);
                 
                 // 重新渲染 FullCalendar (如果存在)
                 if (typeof window.calendar !== 'undefined' && window.calendar) {

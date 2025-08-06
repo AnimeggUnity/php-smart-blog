@@ -241,19 +241,21 @@ body {
     color: #adb5bd;
 }
 
-/* Dark Mode 過渡動畫 */
+/* Dark Mode 過渡動畫 - 減少閃爍 */
 html {
-    transition: color-scheme 0.3s ease-in-out;
+    color-scheme: light dark;
 }
 
-body,
-.card,
-.list-group-item,
-.form-control,
-.btn {
-    transition: background-color 0.3s ease-in-out, 
-                color 0.3s ease-in-out, 
-                border-color 0.3s ease-in-out;
+/* 只在主題切換時才顯示過渡動畫，避免頁面載入時的閃爍 */
+html.theme-transitioning,
+html.theme-transitioning body,
+html.theme-transitioning .card,
+html.theme-transitioning .list-group-item,
+html.theme-transitioning .form-control,
+html.theme-transitioning .btn {
+    transition: background-color 0.2s ease-in-out, 
+                color 0.2s ease-in-out, 
+                border-color 0.2s ease-in-out;
 }
 
 /* Dark Mode 下的特殊調整 */
