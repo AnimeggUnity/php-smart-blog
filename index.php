@@ -376,6 +376,10 @@ switch ($action) {
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>文章列表<?php echo $filter_tag ? ' - 標籤: ' . htmlspecialchars($filter_tag) : ''; ?></h1>
             <div>
+                <button id="theme-toggle" class="btn btn-outline-secondary me-2" type="button" title="切換主題">
+                    <i class="bi bi-moon-fill"></i>
+                    <span class="theme-text d-none d-md-inline ms-1">暗色模式</span>
+                </button>
                 <?php if (isset($_COOKIE[AUTH_COOKIE_NAME]) && $_COOKIE[AUTH_COOKIE_NAME] === AUTH_COOKIE_VALUE): ?>
                     <a href="index.php?action=create" class="btn btn-primary">建立新文章</a>
                     <a href="index.php?action=logout" class="btn btn-danger">登出</a>
@@ -438,8 +442,15 @@ switch ($action) {
         $article = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$article) die("找不到文章");
 ?>
-        <h1><?php echo htmlspecialchars($article['title']); ?></h1>
-        <p class="text-muted">發布於: <?php echo date('Y年m月d日', strtotime($article['created_at'])); ?></p>
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h1><?php echo htmlspecialchars($article['title']); ?></h1>
+                <p class="text-muted">發布於: <?php echo date('Y年m月d日', strtotime($article['created_at'])); ?></p>
+            </div>
+            <button id="theme-toggle" class="btn btn-outline-secondary" type="button" title="切換主題">
+                <i class="bi bi-moon-fill"></i>
+            </button>
+        </div>
         <?php if (!empty($article['tags'])): ?>
             <div class="mb-3">
                 <?php foreach (explode(',', $article['tags']) as $tag): ?>
@@ -479,7 +490,12 @@ switch ($action) {
     case 'create':
         check_auth();
 ?>
-        <h2>建立新文章</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>建立新文章</h2>
+            <button id="theme-toggle" class="btn btn-outline-secondary" type="button" title="切換主題">
+                <i class="bi bi-moon-fill"></i>
+            </button>
+        </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="form_type" value="create_article">
             <div class="mb-3"><label for="title" class="form-label">文章標題</label><input type="text" class="form-control" id="title" name="title" required></div>
@@ -515,7 +531,12 @@ switch ($action) {
         $article = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$article) die("找不到文章");
 ?>
-        <h2>編輯文章</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>編輯文章</h2>
+            <button id="theme-toggle" class="btn btn-outline-secondary" type="button" title="切換主題">
+                <i class="bi bi-moon-fill"></i>
+            </button>
+        </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="form_type" value="update_article">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($article['id']); ?>">

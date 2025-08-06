@@ -175,6 +175,70 @@ function render_footer() {
     </div>
     <!-- 引入 Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 內嵌主題切換功能 -->
+    <script>
+        // Bootstrap 5 Dark Mode Toggle - 內嵌版本
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化主題
+            function loadTheme() {
+                const savedTheme = localStorage.getItem('bs-theme');
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                let theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+                setTheme(theme);
+            }
+            
+            // 設定主題
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-bs-theme', theme);
+                localStorage.setItem('bs-theme', theme);
+                updateToggleButton(theme);
+                
+                // 重新渲染 FullCalendar (如果存在)
+                if (typeof window.calendar !== 'undefined' && window.calendar) {
+                    setTimeout(() => window.calendar.render(), 100);
+                }
+            }
+            
+            // 切換主題
+            function toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+            }
+            
+            // 更新切換按鈕
+            function updateToggleButton(theme) {
+                const toggleButtons = document.querySelectorAll('#theme-toggle');
+                toggleButtons.forEach(button => {
+                    if (!button) return;
+                    const icon = button.querySelector('i');
+                    const text = button.querySelector('.theme-text');
+                    
+                    if (theme === 'dark') {
+                        if (icon) icon.className = 'bi bi-sun-fill';
+                        if (text) text.textContent = '亮色模式';
+                        button.title = '切換到亮色模式';
+                    } else {
+                        if (icon) icon.className = 'bi bi-moon-fill';
+                        if (text) text.textContent = '暗色模式';
+                        button.title = '切換到暗色模式';
+                    }
+                });
+            }
+            
+            // 綁定所有切換按鈕
+            function bindToggleButtons() {
+                const toggleButtons = document.querySelectorAll('#theme-toggle');
+                toggleButtons.forEach(button => {
+                    button.addEventListener('click', toggleTheme);
+                });
+            }
+            
+            // 初始化
+            loadTheme();
+            bindToggleButtons();
+        });
+    </script>
     <!-- 條件載入 FullCalendar JS -->
     <?php if ($action === 'list'): ?>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js"></script>
@@ -182,41 +246,62 @@ function render_footer() {
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const calendarEl = document.getElementById('calendar');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                themeSystem: 'bootstrap5',
-                initialView: 'dayGridMonth',
-                locale: 'zh-tw',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,listMonth'
-                },
-                height: 'auto',
-                events: {
-                    url: 'index.php?action=calendar_events',
-                    failure: function() {
-                        console.error('無法載入日曆事件');
+            
+            // 檢查當前主題
+            function getCurrentTheme() {
+                return document.documentElement.getAttribute('data-bs-theme') || 'light';
+            }
+            
+            // 根據主題設定日曆樣式
+            function getCalendarConfig() {
+                const isDark = getCurrentTheme() === 'dark';
+                
+                return {
+                    themeSystem: 'bootstrap5',
+                    initialView: 'dayGridMonth',
+                    locale: 'zh-tw',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,listMonth'
+                    },
+                    height: 'auto',
+                    events: {
+                        url: 'index.php?action=calendar_events',
+                        failure: function() {
+                            console.error('無法載入日曆事件');
+                        }
+                    },
+                    eventClick: function(info) {
+                        if (info.event.url) {
+                            window.location.href = info.event.url;
+                            info.jsEvent.preventDefault();
+                        }
+                    },
+                    eventDidMount: function(info) {
+                        info.el.setAttribute('title', info.event.title);
+                        // Dark Mode 下調整事件顏色
+                        if (isDark) {
+                            info.el.style.backgroundColor = '#0d6efd';
+                            info.el.style.borderColor = '#0d6efd';
+                        }
+                    },
+                    dayMaxEvents: 3,
+                    moreLinkText: '更多',
+                    noEventsText: '本月沒有文章',
+                    buttonText: {
+                        today: '今天',
+                        month: '月',
+                        list: '列表'
                     }
-                },
-                eventClick: function(info) {
-                    if (info.event.url) {
-                        window.location.href = info.event.url;
-                        info.jsEvent.preventDefault();
-                    }
-                },
-                eventDidMount: function(info) {
-                    info.el.setAttribute('title', info.event.title);
-                },
-                dayMaxEvents: 3,
-                moreLinkText: '更多',
-                noEventsText: '本月沒有文章',
-                buttonText: {
-                    today: '今天',
-                    month: '月',
-                    list: '列表'
-                }
-            });
+                };
+            }
+            
+            const calendar = new FullCalendar.Calendar(calendarEl, getCalendarConfig());
             calendar.render();
+            
+            // 儲存日曆實例供主題切換使用
+            window.calendar = calendar;
         });
     </script>
     <?php endif; ?>

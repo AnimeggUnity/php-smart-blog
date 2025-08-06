@@ -161,3 +161,185 @@ body {
         font-size: 0.9rem;
     }
 }
+
+/* Dark Mode 支援 */
+
+/* 主題切換按鈕樣式 */
+#theme-toggle {
+    transition: all 0.3s ease-in-out;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+#theme-toggle i {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Dark Mode 下的標籤自動完成樣式 */
+[data-bs-theme="dark"] .tag-autocomplete-dropdown {
+    background: var(--bs-dark);
+    border-color: var(--bs-border-color);
+    box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.075);
+}
+
+[data-bs-theme="dark"] .tag-autocomplete-item {
+    color: var(--bs-body-color);
+    border-bottom-color: var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .tag-autocomplete-item:hover,
+[data-bs-theme="dark"] .tag-autocomplete-item.highlighted {
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .tag-autocomplete-item.selected {
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+}
+
+[data-bs-theme="dark"] .tag-autocomplete-item.selected:hover {
+    background-color: var(--bs-primary-border-subtle) !important;
+    color: white !important;
+}
+
+[data-bs-theme="dark"] .tag-autocomplete-loading,
+[data-bs-theme="dark"] .tag-autocomplete-no-results {
+    color: var(--bs-secondary-color);
+}
+
+/* Dark Mode 下的標籤輸入框樣式 */
+[data-bs-theme="dark"] .tag-input-icon {
+    color: var(--bs-secondary-color);
+}
+
+/* Dark Mode 下的標籤顯示樣式 */
+[data-bs-theme="dark"] .badge.bg-info {
+    background-color: var(--bs-info-bg-subtle) !important;
+    color: var(--bs-info-text-emphasis) !important;
+    border: 1px solid var(--bs-info-border-subtle);
+}
+
+[data-bs-theme="dark"] .badge.bg-info:hover {
+    background-color: var(--bs-info) !important;
+    color: white !important;
+}
+
+/* Dark Mode 下的 Lightbox 樣式 */
+[data-bs-theme="dark"] .modal-lightbox {
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+[data-bs-theme="dark"] .close-lightbox {
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .close-lightbox:hover,
+[data-bs-theme="dark"] .close-lightbox:focus {
+    color: #adb5bd;
+}
+
+/* Dark Mode 過渡動畫 */
+html {
+    transition: color-scheme 0.3s ease-in-out;
+}
+
+body,
+.card,
+.list-group-item,
+.form-control,
+.btn {
+    transition: background-color 0.3s ease-in-out, 
+                color 0.3s ease-in-out, 
+                border-color 0.3s ease-in-out;
+}
+
+/* Dark Mode 下的特殊調整 */
+[data-bs-theme="dark"] body {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+
+/* 確保連結在 Dark Mode 下的可讀性 */
+[data-bs-theme="dark"] a {
+    color: var(--bs-link-color);
+}
+
+[data-bs-theme="dark"] a:hover {
+    color: var(--bs-link-hover-color);
+}
+
+/* Dark Mode 下的表單元素調整 */
+[data-bs-theme="dark"] .form-control:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* FullCalendar Dark Mode 樣式 */
+[data-bs-theme="dark"] .fc {
+    --fc-border-color: var(--bs-border-color);
+    --fc-button-text-color: var(--bs-body-color);
+    --fc-button-bg-color: var(--bs-secondary-bg);
+    --fc-button-border-color: var(--bs-border-color);
+    --fc-button-hover-bg-color: var(--bs-tertiary-bg);
+    --fc-button-active-bg-color: var(--bs-primary);
+    --fc-event-bg-color: var(--bs-primary);
+    --fc-event-border-color: var(--bs-primary);
+    --fc-event-text-color: white;
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-toolbar {
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-toolbar .fc-button {
+    background-color: var(--bs-secondary-bg);
+    border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-toolbar .fc-button:hover {
+    background-color: var(--bs-tertiary-bg);
+    border-color: var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-toolbar .fc-button:focus,
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-toolbar .fc-button.fc-button-active {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: white;
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-daygrid-day {
+    background-color: transparent;
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-daygrid-day:hover {
+    background-color: var(--bs-secondary-bg);
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-col-header {
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-scrollgrid {
+    border-color: var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-scrollgrid td,
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .fc-scrollgrid th {
+    border-color: var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .article-event {
+    background-color: var(--bs-info) !important;
+    border-color: var(--bs-info) !important;
+}
+
+[data-bs-theme="dark"] .fc-theme-bootstrap5 .article-event:hover {
+    background-color: var(--bs-info-text-emphasis) !important;
+    border-color: var(--bs-info-text-emphasis) !important;
+}
