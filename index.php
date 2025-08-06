@@ -398,7 +398,7 @@ switch ($action) {
                     <div class="d-flex w-100 justify-content-between align-items-start">
                         <div class="flex-grow-1">
                             <h5 class="mb-1">
-                                <a href="index.php?action=view&id=<?php echo htmlspecialchars($article['id']); ?>" class="text-decoration-none text-dark">
+                                <a href="index.php?action=view&id=<?php echo htmlspecialchars($article['id']); ?>" class="text-decoration-none">
                                     <?php echo htmlspecialchars($article['title']); ?>
                                 </a>
                             </h5>

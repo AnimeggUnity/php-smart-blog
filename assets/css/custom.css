@@ -277,6 +277,24 @@ body,
     box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
 }
 
+/* Dark Mode 下的文章標題顏色修復 */
+[data-bs-theme="dark"] .list-group-item a {
+    color: var(--bs-body-color) !important;
+}
+
+[data-bs-theme="dark"] .list-group-item a:hover {
+    color: var(--bs-link-hover-color) !important;
+}
+
+/* 確保文章標題在暗色模式下可讀 */
+[data-bs-theme="dark"] .list-group-item h5 a {
+    color: var(--bs-body-color) !important;
+}
+
+[data-bs-theme="dark"] .list-group-item h5 a:hover {
+    color: var(--bs-primary) !important;
+}
+
 /* FullCalendar Dark Mode 樣式 */
 [data-bs-theme="dark"] .fc {
     --fc-border-color: var(--bs-border-color);
