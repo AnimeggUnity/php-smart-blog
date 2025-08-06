@@ -1,0 +1,163 @@
+/* 將 Cubic 字型應用於標題元素 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cubic', sans-serif;
+  font-weight: normal; /* Cubic 字型本身很粗，設定為 normal 避免過度加粗 */
+}
+
+/* 將 Cubic 字型應用於整個網頁的內文 */
+body {
+  font-family: 'Cubic', sans-serif; /* 'sans-serif' 是備用字型，如果 Cubic 字型載入失敗，就會用它 */
+  line-height: 1.6; /* 保持行高，讓文字閱讀起來更舒適 */
+}
+
+/* 你也可以應用於按鈕或特定 class */
+.btn {
+    /* 如果希望按鈕也使用，可以取消註解下一行 */
+    /* font-family: 'Cubic', sans-serif; */
+}
+
+/* 標籤樣式 */
+.badge {
+    font-family: 'Cubic', sans-serif; /* 確保標籤也使用 Cubic 字型 */
+    padding: 0.4em 0.6em; /* 調整內邊距 */
+    border-radius: 0.25rem; /* 輕微圓角，與 Bootstrap 協調 */
+    font-size: 0.85em; /* 調整字體大小 */
+    font-weight: bold; /* 加粗 */
+    text-decoration: none; /* 移除下劃線 */
+    display: inline-block; /* 確保可以設定間距 */
+    margin-right: 0.3em; /* 標籤之間留點間距 */
+    margin-bottom: 0.3em; /* 標籤之間留點間距 */
+}
+
+/* Bootstrap 預設的 bg-info 和 text-dark 組合 */
+.badge.bg-info {
+    background-color: #0dcaf0 !important; /* Bootstrap info 藍色 */
+    color: #212529 !important; /* Bootstrap dark 顏色 */
+}
+
+.badge.bg-info:hover {
+    background-color: #0aa2c5 !important; /* 懸停時顏色變深 */
+    color: #fff !important; /* 懸停時文字變白 */
+}
+
+/* 列表專用樣式 - 專注資料傳遞 */
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    border-radius: 0 !important;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.list-group-item:last-child {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* 精簡的標籤樣式 */
+.badge {
+    font-size: 0.75em;
+    padding: 0.25em 0.5em;
+}
+
+/* 按鈕組樣式 */
+.btn-group-sm > .btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* 標籤自動完成功能樣式 */
+.tag-autocomplete-container {
+    position: relative;
+}
+
+.tag-autocomplete-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ced4da;
+    border-top: none;
+    border-radius: 0 0 0.375rem 0.375rem;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.tag-autocomplete-item {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f8f9fa;
+    font-family: 'Cubic', sans-serif;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.tag-autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.tag-autocomplete-item:hover,
+.tag-autocomplete-item.highlighted {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+.tag-autocomplete-item.selected {
+    background-color: #0d6efd !important;
+    color: white !important;
+}
+
+.tag-autocomplete-item.selected:hover {
+    background-color: #0b5ed7 !important;
+    color: white !important;
+}
+
+.tag-autocomplete-loading {
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.tag-autocomplete-no-results {
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* 標籤輸入框樣式增強 */
+.tag-input-wrapper {
+    position: relative;
+}
+
+.tag-input-wrapper .form-control {
+    padding-right: 2.5rem;
+}
+
+.tag-input-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+}
+
+/* 響應式調整 */
+@media (max-width: 576px) {
+    .tag-autocomplete-dropdown {
+        max-height: 150px;
+    }
+    
+    .tag-autocomplete-item {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+    }
+}

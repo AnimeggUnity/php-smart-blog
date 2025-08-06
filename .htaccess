@@ -1,0 +1,7 @@
+# 基本設定
+
+# 防止目錄瀏覽
+Options -Indexes
+
+# 設定預設檔案
+DirectoryIndex index.php 

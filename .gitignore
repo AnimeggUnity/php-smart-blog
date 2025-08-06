@@ -1,0 +1,55 @@
+# 設定檔 (包含敏感資訊)
+config.php
+
+# Claude Code 設定檔案
+.claude/
+
+# 個人配置檔案
+git-config.txt
+
+# 資料庫檔案
+database/
+*.sqlite
+*.db
+
+# 上傳檔案
+uploads/
+uploads/images/
+uploads/attachments/
+
+# 日誌檔案
+logs/
+*.log
+
+# 暫存檔案
+*.tmp
+*.temp
+
+# 系統檔案
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE 檔案
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# PHP 相關
+vendor/
+composer.lock
+
+# Node.js 相關 (如果有用到)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# 測試檔案
+test.php
+phpinfo.php
+
+# 備份檔案
+*.bak
+*.backup
